@@ -1,0 +1,567 @@
+/* One look with the Reels (brand report, 2026-11-13), from makers/brand/brand-guide.html: Young Serif for headings, Figtree for
+   everything else, abyss navy, lagoon and a coral accent. "optional" keeps the page from moving if a font is slow: it then uses the
+   fallback for that visit. */
+@font-face { font-family: "Young Serif"; src: url(fonts/YoungSerif-400.woff2) format("woff2"); font-display: optional; }
+@font-face { font-family: "Figtree"; src: url(fonts/Figtree-var.woff2) format("woff2"); font-weight: 300 900; font-display: optional; }
+/* The Ocean of Us, new site. Simple for now: dark ocean colours and the three-tab bar. */
+:root { --bg: #052a3e; --text: #f4fbf8; --accent: #58e0cf; --card: #0b3d54; --muted: #9fd3de; --coral: #ffb08a; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font: 16px/1.5 Figtree, Figtree, "Helvetica Neue", Arial, sans-serif; }
+a { color: var(--accent); }
+.bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 2; background: #0a2c3f; }
+.bar-links { display: flex; justify-content: center; gap: 12px; padding: 0 12px; }
+.bar-links a { display: block; padding: 12px 8px; font-size: 13px; line-height: 20px; color: var(--muted); } /* 44 px tall to tap (brand report Q7) */
+.tabs { display: flex; gap: 4px; padding: 0 12px calc(8px + env(safe-area-inset-bottom)); background: #0a2c3f; }
+.tabs a { flex: 1 1 auto; white-space: nowrap; text-align: center; padding: 12px 2px; min-height: 44px; border-radius: 10px; color: var(--muted); text-decoration: none; font-weight: 600; }
+.tabs a[aria-current="page"] { background: var(--card); color: var(--text); }
+@media (max-width: 359px) { .tabs a { padding-left: 2px; padding-right: 2px; font-size: 15px; white-space: nowrap; } }
+main { max-width: 640px; margin: 0 auto; padding: 24px 16px calc(130px + env(safe-area-inset-bottom)); }
+.info h2 { margin: 24px 0 6px; font: 400 20px/1.3 "Young Serif", Georgia, "Times New Roman", serif; }
+.info h2 { scroll-margin-top: 16px; }
+/* Arriving from Hide my name or Remove my creature: the section asked for is marked, so it can't be mistaken for its neighbours. */
+.info h2:target { color: var(--accent); padding-left: 10px; border-left: 4px solid var(--accent); }
+.info .steps { counter-reset: step; list-style: none; margin: 12px 0; padding: 0; }
+.info .steps li { counter-increment: step; position: relative; margin: 8px 0; padding: 12px 14px 12px 54px; border-radius: 14px; background: var(--card); }
+.info .steps li::before { content: counter(step); position: absolute; left: 12px; top: 12px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #062030; font-weight: 700; line-height: 30px; text-align: center; }
+.info .actions { justify-content: flex-start; }
+.actions.left { justify-content: flex-start; }
+h1 { margin: 0 0 8px; font: 400 28px/1.2 "Young Serif", Georgia, "Times New Roman", serif; overflow-wrap: anywhere; }
+.card { background: var(--card); border-radius: 18px; padding: 16px; text-align: center; }
+.card .thumb { display: block; width: 100%; max-width: 256px; height: auto; margin: 0 auto 12px; border-radius: 12px; background: #0a2c3f; }
+.card p { margin: 6px 0; }
+.card .muted { color: var(--muted); }
+.card .nick { font-size: 18px; }
+button.button { font: inherit; font-weight: 700; } /* a <button> doesn't take the page's font by itself */
+.button { display: inline-block; margin-top: 12px; padding: 10px 18px; border-radius: 999px; background: var(--accent); color: #062030; text-decoration: none; font-weight: 700; }
+
+/* Everyone tab */
+#search { display: block; width: 100%; margin-top: 4px; min-height: 44px; padding: 10px 14px; border: 1px solid #1d5068; border-radius: 12px; background: var(--card); color: var(--text); font: inherit; }
+#search::placeholder { color: var(--muted); }
+.hint { margin: 8px 0 12px; font-size: 14px; color: var(--muted); }
+.muted { color: var(--muted); }
+.zones { display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 8px; padding: 4px 16px; scrollbar-width: none; }
+.zones[hidden] { display: none; }
+.zone { flex: 0 0 auto; min-height: 44px; padding: 8px 14px; border: 1px solid #1d5068; border-radius: 999px; background: transparent; color: var(--muted); font: 600 14px/1.2 Figtree, "Helvetica Neue", Arial, sans-serif; white-space: nowrap; cursor: pointer; }
+.zone[aria-pressed="true"] { background: var(--card); border-color: var(--accent); color: var(--text); }
+.shelf { margin: 8px 0 6px; }
+.shelf-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; }
+.shelf-head h2 { flex: 1 1 0; min-width: 0; margin: 0; font-size: 17px; line-height: 1.25; overflow-wrap: anywhere; }
+.see-all, .back { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; font-size: 14px; font-weight: 600; text-decoration: none; }
+.row { display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px; padding: 0 16px 4px; scrollbar-width: none; }
+.tile { flex: 0 0 104px; width: 104px; display: block; min-height: 44px; color: var(--text); text-decoration: none; }
+.pic { display: block; width: 100%; aspect-ratio: 256 / 170; border-radius: 8px; background: #0a2c3f; overflow: hidden; }
+.pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ph { display: block; width: 100%; height: 100%; background: linear-gradient(160deg, #123e55, #0a2c3f); }
+/* A username gets two lines, so the whole of it shows under its picture. A short name keeps the same room, so tiles line up. */
+.name { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; min-height: 30px; margin-top: 4px; font-size: 12px; line-height: 15px; overflow: hidden; overflow-wrap: anywhere; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 8px; }
+.grid .tile { width: auto; }
+.name.long { font-size: 11px; }
+/* The very longest usernames, on the narrowest tiles (three across on a small phone), may need a third line. */
+.name.longest { font-size: 10px; line-height: 13px; -webkit-line-clamp: 3; }
+.sentinel { height: 1px; }
+
+/* Creature page: the collector card */
+.card.collector { padding: 4px; background: linear-gradient(150deg, #e8c777, #a47e2c 45%, #f0d995); border-radius: 22px; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4); }
+.card-in { background: var(--card); border-radius: 18px; padding: 14px 14px 16px; min-width: 0; }
+.card-head { display: flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: #f0d995; }
+.card-head .brand { flex: 1 1 0; min-width: 0; font-weight: 700; }
+.card-head .shell { padding: 2px 8px; border: 1px solid #e8c777; border-radius: 999px; font-size: 11px; }
+.stage { position: relative; width: 100%; aspect-ratio: 256 / 170; margin: 12px auto; border-radius: 12px; background: radial-gradient(circle, #2a8aa4, #0a2c3f 90%); overflow: hidden; box-shadow: inset 0 0 0 1px rgba(232, 199, 119, 0.35); }
+.stage .thumb, .stage .portrait { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; border-radius: 0; }
+.stage .portrait[hidden] { display: none; }
+@media (min-width: 480px) { .card.collector { max-width: 420px; margin: 0 auto; } }
+.collector h1 { display: block; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: bold 28px/1.2 "Helvetica Neue", Arial, sans-serif; } /* a username: Georgia draws 0 like o and 1 like I */
+.collector .nick { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 4px 0 0; }
+.collector .nick[hidden] { display: none; }
+.collector .species { font-weight: 600; margin: 6px 0 10px; overflow-wrap: anywhere; }
+.stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.stats li { flex: 1 1 90px; min-width: 0; padding: 8px 6px; border-radius: 10px; background: #0a2c3f; }
+.stats strong { display: block; font-size: 15px; overflow-wrap: anywhere; }
+.stats span { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 16px 0; }
+.actions .button { margin-top: 0; border: 0; font: inherit; font-weight: 700; min-height: 44px; cursor: pointer; }
+.button.ghost, .actions .button.ghost { border: 1px solid var(--accent); background: transparent; color: var(--accent); }
+#near[hidden] { display: none; }
+#near h2 { font-size: 17px; margin: 16px 0 8px; }
+.follow, .small { text-align: center; }
+/* Under a creature's card: how to get one, and the Find box for someone who already has one */
+.yours-too { margin: 20px 0 16px; padding: 14px 12px; border-radius: 16px; background: var(--card); text-align: center; }
+.yours-too p { margin: 0; }
+.yours-too .want { font-weight: 700; font-size: 19px; }
+.yours-too .how { margin-top: 2px; }
+.yours-too .how a { font-weight: 700; text-underline-offset: 5px; } /* below the handle's underscores, which an underline would hide */
+.yours-too .have { margin: 10px 0 8px; font-size: 14px; color: var(--muted); }
+.yours-too .find input { background: #0a2c3f; }
+.yours-too .find input { padding-left: 10px; padding-right: 10px; }
+.yours-too .find input::placeholder { font-size: 14px; }
+.yours-too .find button { padding: 0 14px; }
+@media (max-width: 340px) { .yours-too .find input::placeholder { font-size: 13px; } }
+/* On a phone the box is a band across the screen, so the Find box has the page's full width and its placeholder fits (see .find below). */
+@media (max-width: 400px) { .yours-too { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; border-radius: 0; } .yours-too .find input::placeholder { font-size: inherit; } }
+@media (max-width: 345px) { .yours-too .find input { padding-left: 8px; padding-right: 8px; } .yours-too .find button { padding: 0 12px; } }
+.yours-too .find-msg { text-align: left; }
+.small { font-size: 14px; color: var(--muted); }
+
+/* Share screen */
+#share-screen, #keepsake-screen, #new-year-screen, #print-screen { position: fixed; inset: 0; z-index: 10; overflow: auto; background: var(--bg); padding: 16px 16px calc(24px + env(safe-area-inset-bottom)); }
+.share-panel { max-width: 420px; margin: 0 auto; text-align: center; }
+.share-picture img { display: block; width: auto; max-width: 100%; max-height: 56vh; height: auto; margin: 0 auto 8px; border-radius: 14px; }
+@media (max-height: 600px) { .share-picture img { max-height: 46vh; } } /* so the steps and buttons are on a small phone's screen too */
+.share-note, .share-wait { color: var(--muted); margin: 8px 0; }
+/* Save it, add it to your Story, tag us with the link: numbered, under the picture */
+.share-steps { counter-reset: step; list-style: none; max-width: 360px; margin: 4px auto 14px; padding: 0; text-align: left; font-size: 15px; line-height: 1.4; }
+.share-steps li { counter-increment: step; position: relative; margin: 6px 0; padding-left: 34px; }
+.share-steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #062030; font-size: 14px; font-weight: 700; line-height: 24px; text-align: center; }
+.share-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.share-buttons .button { margin-top: 0; border: 0; font: inherit; font-weight: 700; min-height: 44px; cursor: pointer; }
+.share-buttons [hidden] { display: none; }
+.share-status { min-height: 1.5em; margin: 8px 0; }
+/* The New Year card (report B2): its button on a creature's page and the ocean's sheet, and its screen, which shares the share screen's look. */
+.new-year { margin: 16px 0 0; text-align: center; }
+.button.new-year-open { margin-top: 0; border: 0; min-height: 44px; background: linear-gradient(135deg, #f0d995, #ffb08a); color: #062030; cursor: pointer; }
+.ny-shapes { display: inline-flex; margin: 0 auto 10px; border: 1px solid var(--accent); border-radius: 999px; overflow: hidden; }
+.ny-shapes[hidden] { display: none; }
+.ny-shapes button { min-height: 44px; min-width: 88px; padding: 0 16px; border: 0; background: transparent; color: var(--accent); font: inherit; font-weight: 700; cursor: pointer; }
+.ny-shapes button[aria-pressed="true"] { background: var(--accent); color: #062030; }
+.share-picture img.ny-square { max-height: 46vh; }
+.ny-join { margin: 12px 0 0; font-weight: 700; }
+.ny-join a { color: var(--text); }
+.share-link { display: block; width: 100%; min-height: 44px; margin: 0 0 8px; padding: 10px 14px; border: 1px solid #1d5068; border-radius: 12px; background: var(--card); color: var(--text); font: inherit; }
+/* Close stays in the top corner, beside the picture, so it is on screen however tall the steps are */
+.share-close { position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 6px; z-index: 1; min-height: 44px; padding: 10px 12px; border: 0; border-radius: 999px; background: rgba(5, 42, 62, 0.85); color: var(--muted); font: inherit; text-decoration: underline; cursor: pointer; }
+
+/* The ocean page. The first paint is inline in index.html; these are the parts that come later. */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ocean-page main { position: static; max-width: none; padding: 0; }
+.find { position: relative; display: flex; gap: 8px; }
+.find input { flex: 1 1 0; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid #1d5068; border-radius: 12px; background: var(--card); color: var(--text); font: inherit; }
+.find input::placeholder { color: var(--muted); }
+.find button { flex: 0 0 auto; min-height: 44px; padding: 0 18px; border: 0; border-radius: 12px; background: var(--accent); color: #062030; font: inherit; font-weight: 700; cursor: pointer; }
+.find-choice { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.find-choice[hidden] { display: none; }
+.find-choice .button { margin: 0; min-height: 44px; border: 0; font: inherit; font-weight: 700; cursor: pointer; overflow-wrap: anywhere; }
+/* Name suggestions as you type, dropped down under the Find box over whatever is below it */
+.find-suggest { position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 6; margin: 0; padding: 4px; list-style: none; max-height: min(336px, 60vh); overflow-y: auto; border: 1px solid #1d5068; border-radius: 12px; background: #0a2c3f; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45); text-align: left; }
+.find-suggest[hidden] { display: none; }
+.find-suggest li { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 8px; border-radius: 8px; cursor: pointer; }
+.find-suggest li:hover, .find-suggest li[aria-selected="true"] { background: #164a60; }
+.find-suggest li[aria-selected="true"] { box-shadow: inset 0 0 0 2px var(--accent); }
+.sg-pic { flex: 0 0 48px; width: 48px; height: 32px; border-radius: 6px; background: #0b3d54; overflow: hidden; }
+.sg-pic img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.6); } /* the creature sits small in the middle of its thumbnail */
+.sg-words { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.sg-name { font-weight: 700; color: var(--text); overflow-wrap: anywhere; }
+.sg-kind { font-size: 13px; color: var(--muted); }
+/* Over the ocean the box sits above a card or list that is open, while the names show */
+.find-wrap:has(.find-suggest:not([hidden])) { z-index: 6; }
+.swim-to { display: block; width: 100%; min-height: 44px; margin-top: 8px; padding: 8px 12px; border: 1px solid var(--accent); border-radius: 12px; background: transparent; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; overflow-wrap: anywhere; }
+.swim-to[hidden] { display: none; }
+/* In the spotlight (owner, 2026-11-12): one row of gold name chips under the Find box, scrolling sideways when there are many. */
+.spot { display: flex; align-items: center; gap: 6px; margin-top: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.spot::-webkit-scrollbar { display: none; }
+.spot[hidden] { display: none; }
+.spot-label { flex: 0 0 auto; font-size: 13px; font-weight: 700; color: #ffd25a; white-space: nowrap; }
+.spot-chip { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; padding: 4px 12px; border: 1px solid #ffd25a; border-radius: 999px; background: rgba(255, 210, 90, 0.14); color: #fff3c4; font: 600 14px/1.4 Figtree, "Helvetica Neue", Arial, sans-serif; white-space: nowrap; text-decoration: none; cursor: pointer; }
+.spot-shelf h2 { color: #ffd25a; }
+.spot-shelf .pic { box-shadow: 0 0 0 2px #ffd25a; }
+.spot-chip.spot-yours { border-style: dashed; background: transparent; color: #ffd25a; }
+.find-msg { font-size: 14px; line-height: 1.35; }
+.find-msg:not(:empty) { margin-top: 8px; padding: 8px 10px; border-radius: 10px; background: rgba(5, 42, 62, 0.9); }
+.find-msg p { margin: 0; }
+/* Over the ocean the message has the water behind it; on the other pages it needs a box of its own. */
+body:not(.ocean-page) .find-msg:not(:empty) { background: #0a2c3f; }
+.find button.busy { opacity: 0.6; }
+/* On a phone the placeholder is drawn smaller where the box is narrower, so "Your Instagram or Facebook name" is never cut off (measured in
+   test/site2.browser.test.mjs from 320 to 430 wide). Off the ocean the box sits inside the page's wider margins. Typed text stays 16 px. */
+@media (max-width: 430px) { body:not(.ocean-page) .find input::placeholder { font-size: 14px; } }
+@media (max-width: 400px) { .find input { padding-left: 10px; padding-right: 10px; } .find input::placeholder { font-size: 14px; } }
+@media (max-width: 374px) { body:not(.ocean-page) .find input::placeholder { font-size: 13px; } .find button { padding: 0 14px; } }
+@media (max-width: 345px) { .find input { padding-left: 8px; padding-right: 8px; } .find button { padding: 0 12px; } .find input::placeholder, body:not(.ocean-page) .find input::placeholder { font-size: 12px; } }
+.find-msg .button { margin-top: 8px; border: 0; font: inherit; font-weight: 700; min-height: 44px; cursor: pointer; }
+.tip { position: fixed; left: 50%; top: 34%; z-index: 2; transform: translate(-50%, -50%); width: max-content; max-width: min(420px, calc(100% - 48px)); box-sizing: border-box; margin: 0; padding: 10px 14px; border-radius: 12px; background: rgba(5, 42, 62, 0.86); text-align: center; font-size: 15px; pointer-events: none; }
+.tip[hidden] { display: none; }
+.place { position: fixed; left: 50%; z-index: 2; transform: translateX(-50%); max-width: calc(100% - 48px); margin: 0; padding: 4px 14px; border-radius: 999px; background: rgba(5, 42, 62, 0.62); color: var(--text); font: 600 14px/1.4 Figtree, "Helvetica Neue", Arial, sans-serif; white-space: pre-line; text-align: center; pointer-events: none; opacity: 0; transition: opacity 0.5s; }
+.place.on { opacity: 1; }
+.place[hidden] { display: none; }
+html { -webkit-tap-highlight-color: transparent; } /* buttons answer a press themselves, not with the phone's grey flash */
+.zone:active, .pause:active, .who-open:active, .surprise:active:not(:disabled), .zoom button:active:not(:disabled) { transform: scale(0.94); }
+.ocean-controls { position: fixed; left: 0; right: 0; bottom: calc(var(--bar-h, calc(96px + env(safe-area-inset-bottom))) + 8px); z-index: 2; display: flex; align-items: center; gap: 8px; padding: 0 max(12px, env(safe-area-inset-right)) 0 max(12px, env(safe-area-inset-left)); }
+.ocean-controls[hidden] { display: none; }
+/* The speaker button: a speaker with waves when sound is on, crossed out when it is off. */
+.sound { min-width: 44px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; }
+.sound .snd-on, .sound[aria-pressed="true"] .snd-off { display: none; }
+.sound[aria-pressed="true"] .snd-on { display: inline; }
+.sound[aria-pressed="true"] { border-color: #3fa7c9; }
+/* The same button on a creature's card (in its row of buttons) and in the shop (beside the title): round, quiet, 44 px to tap. */
+.sound-round { flex: 0 0 auto; min-width: 44px; min-height: 44px; padding: 0 10px; border: 1px solid #1d5068; border-radius: 999px; background: rgba(5, 42, 62, 0.85); color: var(--text); cursor: pointer; }
+.sound-round[hidden] { display: none; }
+.sound-round:active { transform: scale(0.94); }
+/* In the shop it sits level with the title, out of the page's flow, so showing it once the script has run moves nothing. */
+body.shop main { position: relative; }
+body.shop h1 { padding-right: 56px; }
+.shop-sound { position: absolute; top: 19px; right: 16px; }
+.ocean-zones { --more-left: 0px; --more-right: 0px; flex: 1 1 0; min-width: 0; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--more-left), #000 calc(100% - var(--more-right)), transparent); mask-image: linear-gradient(90deg, transparent, #000 var(--more-left), #000 calc(100% - var(--more-right)), transparent); }
+.ocean-zones .zone { background: rgba(5, 42, 62, 0.8); color: var(--text); }
+.pause { flex: 0 0 auto; min-width: 64px; min-height: 44px; padding: 0 12px; border: 1px solid #1d5068; border-radius: 999px; background: rgba(5, 42, 62, 0.85); color: var(--text); font: 600 14px/1.2 Figtree, "Helvetica Neue", Arial, sans-serif; cursor: pointer; }
+.sheet { position: fixed; left: 0; right: 0; bottom: var(--bar-h, calc(96px + env(safe-area-inset-bottom))); z-index: 3; max-height: calc(100vh - var(--bar-h, 96px) - 80px); max-height: calc(100dvh - var(--bar-h, 96px) - 80px); overflow: auto; padding: 14px max(16px, env(safe-area-inset-right)) 14px max(16px, env(safe-area-inset-left)); border-radius: 18px 18px 0 0; background: var(--card); text-align: center; transform: translateY(110%); transition: transform 0.3s ease-out; }
+.sheet[hidden] { display: none; }
+.sheet.up { transform: none; }
+.sheet .pic { width: 150px; margin: 0 auto 8px; }
+.sheet-name { display: block; margin: 0; font: bold 26px/1.2 Figtree, "Helvetica Neue", Arial, sans-serif; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.sheet-nick { margin: 2px 0 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.sheet-facts { margin: 6px 0 2px; color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
+.sheet-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px; }
+.sheet-actions .button { margin-top: 0; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; }
+.sheet-join { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+.sheet-join a { color: var(--accent); }
+.sheet-close { position: absolute; top: 6px; right: 6px; width: 44px; height: 44px; border: 0; background: none; color: var(--muted); font-size: 26px; line-height: 1; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .sheet { transition: none; } }
+
+/* Who lives here */
+.who-open { position: fixed; right: max(12px, env(safe-area-inset-right)); bottom: calc(var(--bar-h, calc(96px + env(safe-area-inset-bottom))) + 8px + 44px + 8px); z-index: 2; min-height: 44px; padding: 0 16px; border: 1px solid #1d5068; border-radius: 999px; background: rgba(5, 42, 62, 0.85); color: var(--text); font: 600 14px/1.2 Figtree, "Helvetica Neue", Arial, sans-serif; cursor: pointer; }
+.who-open[hidden] { display: none; }
+.who { position: fixed; left: 0; right: 0; bottom: var(--bar-h, calc(96px + env(safe-area-inset-bottom))); z-index: 4; height: 62vh; height: 62dvh; display: flex; flex-direction: column; border-radius: 18px 18px 0 0; background: var(--card); transform: translateY(110%); transition: transform 0.3s ease-out; }
+.who[hidden] { display: none; }
+.who.up { transform: none; }
+.who-top { flex: 0 0 auto; padding: 12px max(16px, env(safe-area-inset-right)) 8px max(16px, env(safe-area-inset-left)); }
+.who-title { margin: 0; padding-right: 44px; font: 400 20px/1.3 "Young Serif", Georgia, "Times New Roman", serif; }
+.who-sub { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
+.who-close { position: absolute; top: 4px; right: 6px; width: 44px; height: 44px; border: 0; background: none; color: var(--muted); font-size: 26px; line-height: 1; cursor: pointer; }
+.who-list { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 0 max(12px, env(safe-area-inset-right)) 0 max(12px, env(safe-area-inset-left)); }
+.who-inner { position: relative; }
+.who-empty { margin: 16px 4px; color: var(--muted); }
+.who-head, .who-row { position: absolute; left: 0; right: 0; }
+.who-head { display: flex; align-items: flex-end; justify-content: space-between; padding: 0 4px 6px; border-bottom: 1px solid #1d5068; font-weight: 700; font-size: 15px; }
+.who-count { color: var(--muted); font-weight: 600; font-size: 13px; }
+.who-row { display: flex; align-items: center; gap: 10px; padding: 0 4px; }
+.who-row .pic { flex: 0 0 64px; width: 64px; }
+.who-words { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+.who-name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: 600; }
+.who-name.long { font-size: 13px; }
+.who-species { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 13px; color: var(--muted); }
+.who-swim { flex: 0 0 auto; min-width: 76px; min-height: 44px; padding: 0 12px; border: 1px solid var(--accent); border-radius: 999px; background: transparent; color: var(--accent); font: 600 14px/1.2 Figtree, "Helvetica Neue", Arial, sans-serif; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .who { transition: none; } }
+/* Zone goals (report B1) at the top of Who lives here: one line for this zone, every zone when opened. It scrolls on its own, so the list below stays usable on a short phone. */
+.who-goals { margin: 0; max-height: 34vh; max-height: 34dvh; overflow-y: auto; overscroll-behavior: contain; font-size: 14px; }
+.goal-sum { min-height: 44px; padding: 12px 0; line-height: 20px; color: var(--accent); font-weight: 600; cursor: pointer; }
+.goal-list { margin: 0; padding: 0; list-style: none; }
+.goal-row { padding: 4px 0; }
+.goal-top { display: flex; justify-content: space-between; gap: 8px; }
+.goal-zone { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.goal-num { flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.goal-row.here .goal-zone { color: var(--accent); font-weight: 700; }
+.goal-lead { color: var(--muted); font-size: 12px; font-weight: 400; }
+.goal-bar { display: block; height: 6px; margin-top: 3px; border-radius: 3px; background: #1d5068; overflow: hidden; }
+.goal-fill { display: block; height: 100%; border-radius: 3px; background: var(--accent); }
+.goal-extra { display: block; font-size: 12px; color: var(--muted); }
+.goal-note { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+
+/* Surprise me and the Spotted count: bottom left, level with Who lives here on the right, above the zone row */
+.play { position: fixed; left: max(12px, env(safe-area-inset-left)); bottom: calc(var(--bar-h, calc(96px + env(safe-area-inset-bottom))) + 8px + 44px + 8px); z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; max-width: calc(100% - 24px - 150px); }
+.play[hidden] { display: none; }
+.surprise { min-height: 44px; padding: 0 16px; border: 1px solid var(--accent); border-radius: 999px; background: rgba(5, 42, 62, 0.85); color: var(--accent); font: 600 14px/1.2 Figtree, "Helvetica Neue", Arial, sans-serif; white-space: nowrap; cursor: pointer; }
+.spotted-count { margin: 0; padding: 2px 8px; border-radius: 999px; background: rgba(5, 42, 62, 0.85); color: var(--muted); font-size: 12px; line-height: 18px; }
+.spotted-count:empty { display: none; }
+.celebrate { position: fixed; left: 50%; top: 96px; z-index: 5; transform: translateX(-50%); max-width: calc(100% - 32px); margin: 0; padding: 10px 16px; border: 1px solid #e8c777; border-radius: 14px; background: rgba(5, 42, 62, 0.94); color: #f0d995; text-align: center; font-weight: 700; font-size: 15px; animation: celebrate-pop 0.5s ease-out; }
+.celebrate[hidden] { display: none; }
+@keyframes celebrate-pop { 0% { transform: translateX(-50%) scale(0.7); opacity: 0; } 60% { transform: translateX(-50%) scale(1.08); opacity: 1; } 100% { transform: translateX(-50%) scale(1); } }
+@media (prefers-reduced-motion: reduce) { .celebrate { animation: none; } }
+
+/* Everyone: how many live here, and the creature this phone last found */
+.population { margin: -4px 0 12px; font-size: 14px; color: var(--muted); }
+.last-found { display: flex; align-items: center; gap: 12px; min-height: 44px; margin: 10px 0; padding: 8px 12px 8px 8px; border: 1px solid #e8c777; border-radius: 14px; background: var(--card); color: var(--text); text-decoration: none; }
+.last-found .pic { flex: 0 0 72px; width: 72px; }
+.last-found-words { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+.last-found-label { font-size: 12px; color: #f0d995; text-transform: uppercase; letter-spacing: 0.04em; }
+.last-found-name { font-weight: 700; overflow-wrap: anywhere; }
+.spotted-how { margin-top: -6px; }
+
+/* Spotted on the Everyone tab */
+.spotted-line { margin: 4px 0 8px; font-size: 14px; font-weight: 600; color: var(--accent); }
+.keep-finds { margin: 0 0 10px; }
+.keep-finds .button { margin-top: 0; padding: 8px 16px; font-size: 14px; }
+.keep-finds .share-status:empty { display: none; }
+.keep-finds .share-link { margin-top: 8px; }
+.tick { flex: 0 0 auto; color: var(--accent); font-weight: 700; }
+
+/* Hide and seek: the button joins Surprise me; during a round the round bar takes the place of that column and of Who lives here, just above the zone row */
+.play .surprise:disabled { opacity: 0.45; cursor: default; }
+.seek-hud { position: fixed; left: max(12px, env(safe-area-inset-left)); right: max(12px, env(safe-area-inset-right)); bottom: calc(var(--bar-h, calc(96px + env(safe-area-inset-bottom))) + 8px + 44px + 8px); z-index: 2; display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 6px 8px 6px 6px; border: 1px solid #1d5068; border-radius: 16px; background: rgba(5, 42, 62, 0.92); }
+.seek-hud[hidden] { display: none; }
+.seek-hud .pic { flex: 0 0 64px; width: 64px; }
+.seek-words { flex: 1 1 0; min-width: 0; }
+.seek-name, .seek-line { margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.seek-name { font-weight: 700; font-size: 15px; }
+.seek-line { font-size: 13px; color: var(--muted); }
+.seek-hud .surprise { flex: 0 0 auto; }
+body.seeking .play, body.seeking .who-open { display: none; }
+
+/* Zoom: side by side, above Who lives here and above the round bar during Hide and seek */
+.zoom { position: fixed; right: max(12px, env(safe-area-inset-right)); bottom: calc(var(--bar-h, calc(96px + env(safe-area-inset-bottom))) + 8px + 44px + 8px + 56px + 8px); z-index: 2; display: flex; flex-direction: row; gap: 8px; }
+@media (max-height: 400px) { .zoom { flex-direction: row; } .spotted-count { display: none; } } /* a phone on its side: side by side, so the buttons stay clear of the Find box */
+/* On its side there is no room above the round bar's height, so + and - sit just above Who lives here (a round still lifts them clear of its bar). */
+@media (max-height: 400px) { body:not(.seeking) .zoom { bottom: calc(var(--bar-h, calc(96px + env(safe-area-inset-bottom))) + 8px + 44px + 8px + 44px + 8px); } }
+.zoom[hidden] { display: none; }
+.zoom button { width: 44px; height: 44px; padding: 0; border: 1px solid #1d5068; border-radius: 50%; background: rgba(5, 42, 62, 0.85); color: var(--text); font: 600 24px/1 Figtree, "Helvetica Neue", Arial, sans-serif; cursor: pointer; }
+.zoom button:disabled { opacity: 0.4; cursor: default; }
+
+/* The shop page and the card's gift line */
+.gift { margin: 2px 0 6px; font-size: 14px; color: var(--accent); }
+/* "Decorate it": a plain link on its own line under the card's buttons, never a button beside Share */
+.actions .decorate { flex: 0 0 100%; display: flex; justify-content: center; margin-top: -4px; }
+.decorate a, .sheet-decorate a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; font-size: 15px; color: var(--muted); text-underline-offset: 3px; }
+.sheet-decorate { margin: 4px 0 0; }
+/* 1 Pick an item, 2 Whose creature, 3 Pay: the steps under the intro, and the same numbers on the form's headings */
+.shop-step-no { display: inline-block; flex: 0 0 auto; width: 24px; height: 24px; margin-right: 6px; border-radius: 50%; background: var(--accent); color: #062030; font: 700 14px/24px Figtree, "Helvetica Neue", Arial, sans-serif; text-align: center; vertical-align: 2px; }
+.shop-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin: 14px 0 6px; padding: 0; list-style: none; font-size: 14px; font-weight: 600; line-height: 1.25; text-align: center; }
+.shop-steps li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.shop-steps .shop-step-no { position: relative; z-index: 1; margin: 0; vertical-align: 0; }
+.shop-steps li + li::before { content: ""; position: absolute; top: 11px; right: 50%; width: calc(100% + 4px); height: 2px; background: #1d5068; } /* the line joining the numbers */
+.info h2.shop-step { margin-top: 28px; }
+.shop-facts { padding-left: 20px; }
+.shop-kind h3 { margin: 18px 0 2px; font: 400 18px/1.3 "Young Serif", Georgia, "Times New Roman", serif; } /* each kind sits under 1 Pick an item */
+.shop-kind p { margin: 0; }
+/* The items, three across on a phone, so all of them are a short scroll; the pictures keep their square while they load */
+.shop-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; margin: 8px 0 12px; }
+.shop-item { position: relative; display: flex; flex-direction: column; gap: 2px; min-width: 0; min-height: 44px; padding: 8px; border: 1px solid #1d5068; border-radius: 12px; background: var(--card); cursor: pointer; line-height: 1.25; }
+.shop-item input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.shop-item:has(input:checked) { border-color: var(--accent); background: #134560; box-shadow: 0 0 0 2px var(--accent); }
+/* The picked one also carries a tick, so it doesn't rely on colour alone. It is drawn: a tick character isn't in Figtree, and looking for
+   one in the phone's fonts stalled the first pick (2026-11-15, 55 to 70 ms slowed 4x). With no text, a screen reader reads nothing out. */
+.shop-item:has(input:checked)::after { content: ""; position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; border-radius: 50%; background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpath d='M8 13.6l3.4 3.4 6.8-7.6' fill='none' stroke='%23062030' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 26px 26px no-repeat; pointer-events: none; }
+.shop-item:has(input:focus-visible) { outline: 3px solid var(--text); outline-offset: 2px; }
+.shop-pic { display: block; aspect-ratio: 1; margin-bottom: 4px; border-radius: 10px; overflow: hidden; background: #0d3a52; }
+.shop-pic img { display: block; width: 100%; height: 100%; }
+.shop-label { font-weight: 600; font-size: 15px; overflow-wrap: anywhere; }
+.shop-price { color: var(--muted); font-size: 14px; }
+/* Black Friday (tools/shop-page.mjs, js/shop-sale.js): the sale's parts and the usual ones swap by the visitor's clock. */
+.sale-only[hidden], .usual-only[hidden] { display: none !important; }
+/* The Christmas bundle (tools/shop-page.mjs): gone once 25 December ends (js/shop-sale.js watchUntil); its five pictures in one row. */
+[data-until][hidden] { display: none !important; }
+.shop-bundle .shop-pack-pics { grid-template-columns: repeat(5, 1fr); }
+.shop-bundle-offer { margin: 10px 0; }
+.shop-bundle-offer[hidden] { display: none; }
+.shop-price .sale-only { color: #ffd25a; font-weight: 700; }
+.shop-price .sale-only s { color: var(--muted); font-weight: 400; margin-left: 4px; }
+.shop-sale { color: #ffd25a; font-weight: 700; }
+.shop-dates { color: var(--muted); font-size: 12px; line-height: 1.3; }
+.shop-field { display: block; margin: 8px 0 6px; }
+#shop-name { width: 100%; box-sizing: border-box; min-height: 44px; padding: 10px 12px; border: 1px solid #1d5068; border-radius: 12px; background: var(--card); color: var(--text); font: inherit; }
+#shop-name::placeholder { color: var(--muted); }
+#shop-name:focus { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: 1px; }
+/* Room for the longest answer is kept under the box, so the name check never pushes Gift and Pay down: two lines ("We can't find that
+   creature" and "The shop works with Instagram usernames for now."), and three on a narrow phone, where the second one wraps. */
+#shop-msg { min-height: 54px; margin-top: 8px; }
+@media (max-width: 379px) { #shop-msg { min-height: 73px; } }
+.shop-facts.small { margin-top: 24px; color: var(--muted); font-size: 14px; line-height: 1.4; text-align: left; } /* .small centres; a list reads from its bullets */
+.shop-facts.small li + li { margin-top: 4px; }
+.shop-gift { display: flex; align-items: center; gap: 10px; margin: 4px 0 0; min-height: 44px; cursor: pointer; }
+.shop-gift input { flex: 0 0 auto; width: 22px; height: 22px; margin: 0; accent-color: var(--accent); cursor: pointer; }
+.shop-gift input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
+.shop-pay-line { margin: 8px 0 0; }
+#shop-pay { display: inline-flex; align-items: center; justify-content: center; min-width: 160px; min-height: 48px; margin-top: 0; padding: 10px 28px; font-size: 18px; cursor: pointer; }
+#shop-pay:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+/* Until an item and a creature are picked, Pay is flat and grey, not a faded version of the live button */
+#shop-pay[aria-disabled="true"] { background: #1a3a4b; color: #86a9b3; box-shadow: inset 0 0 0 1px #2c5568; cursor: not-allowed; }
+.shop-terms-line a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; }
+/* The preview: a strip with the creature on the left. On a phone tall enough for it, it stays at the top while the items scroll by. */
+.shop-preview { display: flex; align-items: center; gap: 12px; margin: 12px -16px 0; padding: 8px 16px; background: var(--bg); box-shadow: 0 1px 0 #1d5068; }
+.shop-preview canvas { display: block; flex: 0 0 auto; width: min(46%, 220px); height: auto; aspect-ratio: 256 / 170; border-radius: 12px; background: radial-gradient(circle, #2a8aa4, #0a2c3f); }
+.shop-preview-words { flex: 1 1 0; min-width: 0; }
+.info .shop-preview h2 { margin: 0; font-size: 18px; }
+.shop-preview-item { margin: 2px 0 0; font-weight: 600; overflow-wrap: anywhere; }
+.shop-preview-item:empty { display: none; }
+.shop-preview-note { margin: 2px 0 0; color: var(--muted); font-size: 14px; line-height: 1.35; }
+/* Pinned (js/shop.js) only while the strip takes at most a quarter of the screen; the script then sets the page's top scroll padding to
+   its height, so a box or item reached with Tab lands below it. The tab bar at the bottom gets the same room. */
+.shop-preview.pinned { position: sticky; top: 0; z-index: 1; }
+html:has(body.shop) { scroll-padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
+
+/* Owner, 2026-11-12: "Try one on" on a creature's card and its Find result: a few shop items, each opening the shop wearing it. */
+.try-on { margin: 14px 0 0; text-align: center; }
+.try-on-title { margin: 0 0 6px; color: var(--muted); font-size: 14px; }
+.try-on-row { display: flex; justify-content: center; gap: 8px; }
+.try-on-item { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 68px; min-height: 44px; color: var(--text); font-size: 12px; line-height: 1.2; text-decoration: none; }
+.try-on-item img { display: block; width: 56px; height: 56px; border: 1px solid #1d5068; border-radius: 14px; background: #0d3a52; }
+.try-on-spot img { border-color: #ffd25a; box-shadow: 0 0 10px rgba(255, 210, 90, 0.35); }
+.try-on-item:active img { transform: scale(0.94); }
+.try-on-item:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; border-radius: 14px; }
+/* Brand report B7: the A$6 packs, one plain line under Try one on. Each link is 44 px tall to tap. */
+.try-on-packs { margin: 6px 0 0; color: var(--muted); font-size: 14px; line-height: 1.3; }
+.try-on-pack { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; color: #ffd25a; font-weight: 700; text-underline-offset: 3px; }
+/* The keepsake (brand report B7): a chip for each thing the creature has, then a button for each size. */
+.keepsake { margin: 18px 0 0; padding: 12px 12px 4px; border: 1px solid #1d5068; border-radius: 16px; text-align: center; }
+.keepsake h2 { margin: 0; font-size: 17px; }
+.keepsake-blurb { margin: 4px 0 10px; color: var(--muted); font-size: 14px; line-height: 1.35; }
+.keepsake-pick { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.keepsake-choice { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 72px; min-height: 44px; padding: 4px 2px; border: 0; border-radius: 14px; background: transparent; color: var(--text); font: inherit; font-size: 12px; line-height: 1.2; cursor: pointer; }
+.keepsake-choice img { display: block; width: 56px; height: 56px; object-fit: cover; border: 2px solid #1d5068; border-radius: 14px; background: #0d3a52; }
+.keepsake-choice[aria-pressed="true"] img { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.keepsake-choice[aria-pressed="true"] span { font-weight: 700; }
+.keepsake-choice:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
+.keepsake-sizes { margin: 12px 0; }
+.keepsake-picture img { max-height: 60vh; }
+.print-card { margin: 18px 0 0; text-align: center; }
+.print-blurb { margin: 0 0 6px; color: var(--muted); font-size: 14px; line-height: 1.35; }
+.print-picture img { width: min(100%, 56vh); }
+/* Rows that scroll sideways fade at their edges, so it shows there is more and nothing looks cut off. */
+.zones, .row { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 22px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 22px), transparent 100%); }
+.spot { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent 100%); mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent 100%); }
+/* Pictures fade in as they arrive instead of popping (js/everyone.js marks them loaded). */
+.tile .pic img.fade { opacity: 0; transition: opacity 0.35s ease; }
+.tile .pic img.fade.loaded { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .tile .pic img.fade { transition: none; } }
+/* Deals (owner, 2026-11-12): pack cards, two to a row, each showing its three items. */
+.shop-packs { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.shop-pack { border-color: #ffd25a; }
+.shop-pack-pics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-bottom: 4px; }
+.shop-pack-pics img { display: block; width: 100%; height: auto; aspect-ratio: 1; border-radius: 8px; background: #0d3a52; }
+.shop-pack-items { color: var(--muted); font-size: 13px; line-height: 1.3; }
+.shop-pack .shop-price { color: #ffd25a; font-weight: 700; }
+.shop-pack .shop-price s { color: var(--muted); font-weight: 400; margin-left: 4px; }
+/* The collection under the shop preview (owner, 2026-11-12). */
+.shop-owned { margin: 12px 0 0; padding: 8px 10px; border-radius: 10px; background: var(--card); color: var(--text); font-size: 14px; line-height: 1.4; }
+.shop-owned[hidden] { display: none; }
+/* The shop's name box holds its suggestions (owner, 2026-11-12), dropping down over the page like the Find box's. The list carries its own
+   z-index; the box itself has none, so it scrolls under the fixed tab bar instead of over it. */
+.shop-name-wrap { position: relative; }
+/* The giveaway (owner, 2026-11-12): its line on the shop, and its page. */
+.giveaway-banner { margin: 12px 0 0; padding: 10px 12px; border: 1px solid #ffd25a; border-radius: 12px; background: rgba(255, 210, 90, 0.12); color: var(--text); font-size: 15px; line-height: 1.4; }
+.giveaway-banner a { color: #ffd25a; }
+.giveaway-lead { font-size: 18px; }
+.giveaway-how, .giveaway-result { padding: 10px 12px; border-radius: 12px; background: var(--card); }
+.giveaway-rules li + li { margin-top: 6px; }
+/* Prices in the visitor's money and "Ask someone to buy it" (owner, 2026-11-12). */
+.shop-local { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.shop-local[hidden] { display: none; }
+.shop-ask-line { margin: 10px 0 0; }
+#shop-ask { min-height: 44px; font: inherit; font-weight: 600; cursor: pointer; }
+#shop-ask:disabled { opacity: 0.45; cursor: not-allowed; }
+.shop-ask-help { margin: 4px 0 0; color: var(--muted); }
+.shop-ask-msg { margin: 4px 0 0; overflow-wrap: anywhere; }
+.shop-ask-msg:empty { display: none; }
+/* Zone sponsors and the Partner with us page (owner, 2026-11-12). */
+.zone-sponsor { margin: -2px 0 8px; color: var(--muted); font-size: 13px; }
+.zone-sponsor[hidden] { display: none; }
+.partner-lead { font-size: 18px; }
+.partner-facts li + li { margin-top: 4px; }
+.partner-asof { font-size: 13px; opacity: .8; margin-top: 2px; }
+@media print {
+  body { background: #fff; color: #0a1f2b; }
+  .bar, .tabs, nav.tabs, .partner-line { display: none !important; }
+  main { padding: 0 8mm; max-width: none; }
+  .info a { color: #0a5f7a; }
+}
+/* Giving (owner, 2026-11-12): the line under the shop's intro. */
+.shop-giving { margin: 8px 0 0; color: var(--text); font-size: 15px; }
+.shop-giving a { color: var(--accent); }
+/* Inside Instagram's or Facebook's browser (shop.js): the tip about Apple Pay and Google Pay, under Pay. */
+.shop-inapp { margin: 10px 0 0; padding: 10px 12px; border-radius: 10px; background: #0a2c3f; }
+.shop-inapp p { margin: 0; }
+.shop-inapp p + p { margin-top: 8px; }
+/* The promise, first in the one-time tip (brand report, 2026-11-13). */
+.tip-promise { display: block; margin-bottom: 6px; font-size: 16px; color: var(--text); }
+/* The start page (bio link): the promise large, then the ways in. */
+.start-promise { margin: 4px 0 10px; font: 400 24px/1.25 "Young Serif", Georgia, serif; color: var(--text); }
+.start-links { margin-top: 18px; }
+/* The grown-up view on ask links (report F2). */
+.shop-grownup { margin: 14px 0 6px; padding: 14px 16px; border-radius: 14px; background: var(--card); }
+.shop-grownup h2 { margin: 0 0 6px; }
+.shop-grownup p, .shop-grownup ul { margin: 6px 0; }
+.shop-grownup ul { padding-left: 20px; }
+.shop-grownup-item:empty { display: none; }
+/* The milestone line (report N4). */
+.milestone { margin: 8px 0; padding: 8px 12px; border-left: 3px solid var(--accent); color: var(--text); font-weight: 600; }
+/* The month's ocean event (report N3), in the festive gold the Spotlight uses. */
+.milestone.event { border-left-color: #ffd25a; }
+/* Zone goals (report B1) on How it works: a few sentences, so in the body weight rather than bold. */
+.milestone.zone-goals { font-weight: 400; }
+/* The footer on the reading pages (brand report Q5): who makes this, privacy, grown-ups, terms and contact. */
+.foot { margin: 36px 0 0; padding-top: 14px; border-top: 1px solid #1d5068; color: var(--muted); font-size: 14px; line-height: 1.4; text-align: center; }
+.foot p { margin: 0; }
+.foot .foot-links { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 4px; margin-top: 4px; }
+.foot-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; color: var(--muted); text-underline-offset: 3px; }
+/* The start page: the emblem by the name, and finding your creature right there. */
+.start-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.start-head img { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%; box-shadow: 0 0 0 2px #1d5068; }
+.start-head h1 { margin: 0; }
+.start-find { margin: 18px -16px 0; padding: 14px 16px 16px; background: var(--card); } /* a band across the screen, so the box has the page's full width */
+@media (min-width: 672px) { .start-find { margin-left: 0; margin-right: 0; border-radius: 16px; } }
+.info .start-find h2 { margin: 0 0 8px; }
+.start-find .find input { background: #0a2c3f; }
+.start-find .last-found { margin: 0 0 10px; background: #0a2c3f; }
+.start-find .find-msg:not(:empty) { background: #0a2c3f; }
+.start-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.start-links .button { margin: 0; display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 10px; line-height: 1.2; }
+.start-links .button:first-child { grid-column: 1 / -1; }
+/* Everyone: how to get a creature, for someone who hasn't got one */
+.join-line { margin-bottom: 0; color: var(--text); }
+.join-line + .hint { margin-top: 4px; }
+/* Shop, phone polish (2026-11-13). Next in the preview strip: to step 1 or step 3, whichever is still to do. */
+.shop-next { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 6px; padding: 6px 18px; }
+.shop-next[hidden] { display: none; }
+/* A link to each kind of item, under "2 Pick something", in a row that scrolls sideways. */
+.shop-jump { display: flex; gap: 8px; overflow-x: auto; margin: 6px -16px 2px; padding: 4px 16px; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 22px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 22px), transparent 100%); }
+.shop-jump::-webkit-scrollbar { display: none; }
+.shop-jump a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid #1d5068; border-radius: 999px; color: var(--text); font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.shop-jump a:active { transform: scale(0.96); }
+.shop-kind { scroll-margin-top: 12px; }
+/* The grown-up view: whose creature, what they asked for, and Pay, at the top of the page. */
+.shop-grownup-pick { display: flex; align-items: center; gap: 12px; margin: 10px 0; padding: 10px; border-radius: 12px; background: #0a2c3f; }
+.shop-grownup-pick[hidden] { display: none; }
+.shop-grownup-for { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.shop-grownup-for .pic { width: 100%; max-width: 150px; }
+.shop-grownup-name { font-weight: 700; overflow-wrap: anywhere; }
+.shop-grownup-what { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.shop-grownup-what .shop-pic { width: 72px; margin: 0; }
+.shop-grownup-what .shop-pack-pics { width: 100%; max-width: 150px; margin: 0; }
+.shop-grownup-words { display: flex; flex-direction: column; line-height: 1.3; }
+.shop-grownup-words span { color: var(--muted); }
+.shop-grownup-gift { color: var(--muted); font-size: 14px; }
+.shop-grownup-gift[hidden] { display: none; }
+.shop-grownup .shop-pay-line { margin: 10px 0 6px; }
+#shop-grownup-pay { display: inline-flex; align-items: center; justify-content: center; min-width: 160px; min-height: 48px; margin-top: 0; padding: 10px 28px; font-size: 18px; cursor: pointer; }
+#shop-grownup-pay[aria-disabled="true"] { background: #1a3a4b; color: #86a9b3; box-shadow: inset 0 0 0 1px #2c5568; cursor: not-allowed; }
+/* On an ask link the page is for a grown-up: the children's giveaway line and the step pictures step aside. */
+body.shop-asked .giveaway-banner, body.shop-asked .shop-steps { display: none; }
+/* Just the ocean (owner, 2026-11-13): the button beside + and -, and everything it hides. Hidden, not removed, so nothing moves when
+   the menus come back. */
+.zoom #just-ocean { display: inline-flex; align-items: center; justify-content: center; font-size: 0; }
+body.just-ocean .find-wrap, body.just-ocean .bar, body.just-ocean #controls, body.just-ocean #who-open, body.just-ocean #zoom,
+body.just-ocean #play, body.just-ocean #seek-hud, body.just-ocean #tip, body.just-ocean #place, body.just-ocean #celebrate,
+body.just-ocean #who, body.just-ocean #sheet, body.just-ocean #overlay, body.just-ocean #meter, body.just-ocean .find-suggest { visibility: hidden !important; pointer-events: none !important; }
+/* The way back: small and quiet in the top corner, but always there. */
+.show-all { display: inline-flex; align-items: center; position: fixed; top: calc(10px + env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); z-index: 7; min-height: 44px; padding: 0 14px; border: 1px solid rgba(159, 211, 222, 0.45); border-radius: 999px; background: rgba(5, 42, 62, 0.55); color: var(--text); font: 600 14px/1.2 Figtree, "Helvetica Neue", Arial, sans-serif; cursor: pointer; }
+.show-all[hidden] { display: none; }
+/* Facebook creatures in the shop (buying report N2): several with the name typed, one button each with its picture and animal. */
+.shop-choice { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 0; }
+.shop-choice[hidden] { display: none; }
+.shop-choice-one { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 12px 6px 8px; border: 1px solid #1d5068; border-radius: 12px; background: #0a2c3f; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+.shop-choice-one:hover, .shop-choice-one:focus-visible { background: #164a60; }
+/* The gift link under Pay, once Gift is ticked (buying report N1). */
+.shop-giftlink { margin: 10px 0 0; padding: 10px 12px; border-radius: 10px; background: #0a2c3f; }
+.shop-giftlink[hidden] { display: none; }
+.shop-giftlink p { margin: 0; text-align: left; }
+.shop-giftlink p + p { margin-top: 8px; }
+.shop-giftlink .button { margin: 0; border: 0; font: inherit; font-weight: 700; min-height: 44px; cursor: pointer; }
+.shop-giftlink .button.ghost { border: 1px solid var(--accent); }
+/* The gift page (/gift/): the grown-ups' guide, and the view a gift link opens. */
+.gift-to[hidden], .gift-guide[hidden], .gift-to [hidden] { display: none; }
+.gift-steps { padding-left: 1.4em; }
+.gift-steps li + li { margin-top: 6px; }
+.gift-sample { margin: 16px 0; }
+.gift-sample figcaption { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+.gift-sample-pic, .gift-picture img, .gift-picture canvas { display: block; width: 100%; max-width: 420px; height: auto; aspect-ratio: 1080 / 1350; margin: 0 auto; border-radius: 14px; background: #0a2c3f; }
+.gift-cards { display: flex; flex-direction: column; gap: 10px; margin: 8px 0 16px; padding: 0; list-style: none; }
+.gift-card { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 12px; background: #0a2c3f; }
+.gift-card .shop-pic { flex: 0 0 72px; width: 72px; margin: 0; }
+.gift-card .shop-pack-pics { flex: 0 0 132px; width: 132px; margin: 0; }
+.gift-card-words { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+.gift-card-words span { color: var(--muted); font-size: 14px; }
+.gift-pack .shop-price { color: #ffd25a; font-weight: 700; }
+.gift-pack .shop-price s { color: var(--muted); font-weight: 400; margin-left: 4px; }
+.gift-card .button { flex: 0 0 auto; margin: 0; min-height: 44px; display: inline-flex; align-items: center; }
+.gift-facts { color: var(--muted); font-size: 14px; line-height: 1.4; }
+.gift-to-msg:empty { display: none; }
+@media (max-width: 380px) { .gift-card { flex-wrap: wrap; } .gift-card .button { flex: 1 1 100%; justify-content: center; } }

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Everyone - The Ocean of Us</title><meta name="robots" content="noindex,noimageindex"><meta name="ocean-steps" content="on"><link rel="icon" type="image/svg+xml" href="../favicon.svg"><link rel="preload" href="../fonts/Figtree-var.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../fonts/YoungSerif-400.woff2" as="font" type="font/woff2" crossorigin><meta property="og:type" content="website"><meta property="og:site_name" content="The Ocean of Us"><meta property="og:url" content="https://theoceanofus.pages.dev/everyone/"><meta property="og:title" content="Everyone - The Ocean of Us"><meta property="og:description" content="Every creature in the ocean, zone by zone, each one a real person. Comment an ocean animal on any of our Reels to join."><meta property="og:image" content="https://theoceanofus.pages.dev/shared-preview.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/jpeg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://theoceanofus.pages.dev/shared-preview.jpg">
+<link rel="stylesheet" href="../site.css">
+</head><body class="everyone"><div class="bar"><div class="bar-links"><a class="hide-link" href="../how/#hide">Hide my name</a><a class="remove-link" href="../how/#remove">Remove my creature</a></div><nav class="tabs" aria-label="Sections"><a href="../">Ocean</a><a href="../everyone/" aria-current="page">Everyone</a><a href="../how/">How it works</a><a href="../shop/">Shop</a></nav></div>
+<main>
+<h1>Everyone</h1>
+<div class="find" role="search"><label class="sr-only" for="name">To find a person, type their Instagram or Facebook name</label><input id="name" type="text" placeholder="Your Instagram or Facebook name" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="search"><button id="find-btn" type="button">Find</button></div>
+<div id="find-msg" class="find-msg" role="status"></div>
+<script>document.getElementById('find-btn').onclick=function(){window.earlyFind=1};document.getElementById('name').onkeydown=function(e){if(e.key==='Enter')window.earlyFind=1};</script>
+<p class="hint join-line">No creature yet? Comment an ocean animal on any of <a href="https://www.instagram.com/the_ocean_of_us/">our Reels</a> and it becomes you.</p>
+<p class="hint">Don't want your name shown? Comment "hide my name" on any of our Reels or posts.</p>
+<input id="search" type="search" placeholder="Search an animal" aria-label="Search an animal" autocomplete="off" autocapitalize="off" spellcheck="false">
+<div id="zones" class="zones" role="group" aria-label="Zones"></div>
+<div id="content" aria-live="polite"><p class="muted">Loading the ocean...</p></div>
+<footer class="foot"><p>The Ocean of Us is made by one person in Victoria, Australia.</p><p class="foot-links"><a href="../privacy/">About and privacy</a><a href="../grown-ups/">For grown-ups</a><a href="../shop/terms/">Shop terms</a><a href="mailto:theoceanofus@gmail.com">Contact us</a></p></footer>
+</main>
+<script type="module" src="../js/everyone.js"></script>
+</body></html>

@@ -1,0 +1,20 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-hashes' 'sha256-22v/Fx8Zpelkem2sMKLnak/KsvYq3icGbX5gVvj5dZ0=' 'sha256-GZIcz60Uwd6wT3vaYke/atSr53TehbYAPepOa3d03Vw=' 'sha256-M+M/a7ojZsp4TO7jgzGo8vuEheRWQtGubG3mLI5Y3no=' 'sha256-MhtPZXr7+LpJUY5qtMutB+qWfQtMaPccfe7QXtCcEYc=' 'sha256-fq1pUYUwM5WETkG9+l8QE00FFbmAvj/3zieK0KAD4wE=' 'sha256-kdMUjdjImtfNfAT9FUD+my5aL1Zq9bRM8X038BstrDY=' 'sha256-lNG54xe86oFKBfavfK9PJisXpiy8ZLKeCw7tMjGkeoA=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+/fonts/*
+  Cache-Control: public, max-age=2592000
+/names.json
+  X-Robots-Tag: noindex, noimageindex
+/areas/*
+  X-Robots-Tag: noindex, noimageindex
+/find/*
+  X-Robots-Tag: noindex, noimageindex
+/thumbs/*
+  X-Robots-Tag: noindex, noimageindex
+/cards/*
+  X-Robots-Tag: noindex, noimageindex
+/c/*
+  X-Robots-Tag: noindex, noimageindex

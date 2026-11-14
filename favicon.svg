@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Ocean of Us profile picture. Editable: each shape is a named group. No text.
+     Everything sits inside a 430 px radius, safe for Instagram's circular crop. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <title>The Ocean of Us emblem: a turquoise wave curling around a coral-orange fish</title>
+  <rect id="background-navy" width="1080" height="1080" fill="#052A3E"/>
+  <g id="wave">
+    <path id="wave-body" fill="#2FD6C3" d="M148 640 C176 800 330 926 524 926 C742 926 918 756 918 534 C918 322 752 158 546 158 C416 158 300 222 244 330 C222 374 214 424 226 468 C252 386 334 322 442 322 C580 322 692 424 692 556 C692 664 612 738 512 738 C376 738 248 716 148 640 Z"/>
+    <path id="wave-shade" fill="#14A79F" d="M148 640 C176 800 330 926 524 926 C742 926 918 756 918 534 C918 482 908 432 890 388 C894 416 896 444 896 472 C896 666 744 824 548 836 C394 846 240 770 148 640 Z"/>
+  </g>
+  <g id="fish" fill="#FF7A4D">
+    <path id="fish-tail" d="M402 546 L286 462 C306 516 306 576 286 630 Z"/>
+    <path id="fish-body" d="M352 546 C412 462 494 428 556 438 C606 446 640 492 648 546 C640 600 606 646 556 654 C494 664 412 630 352 546 Z"/>
+    <circle id="fish-eye" cx="582" cy="516" r="21" fill="#052A3E"/>
+  </g>
+</svg>

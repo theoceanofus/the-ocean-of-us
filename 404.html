@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Not here - The Ocean of Us</title><link rel="icon" type="image/svg+xml" href="https://theoceanofus.pages.dev/favicon.svg"><link rel="preload" href="https://theoceanofus.pages.dev/fonts/Figtree-var.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="https://theoceanofus.pages.dev/fonts/YoungSerif-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://theoceanofus.pages.dev/site.css">
+</head><body><div class="bar"><div class="bar-links"><a class="hide-link" href="https://theoceanofus.pages.dev/how/#hide">Hide my name</a><a class="remove-link" href="https://theoceanofus.pages.dev/how/#remove">Remove my creature</a></div><nav class="tabs" aria-label="Sections"><a href="https://theoceanofus.pages.dev/">Ocean</a><a href="https://theoceanofus.pages.dev/everyone/">Everyone</a><a href="https://theoceanofus.pages.dev/how/">How it works</a><a href="https://theoceanofus.pages.dev/shop/">Shop</a></nav></div>
+<main><h1>Nothing here</h1><p>That page isn't in the ocean. If it was someone's creature, it may have left.</p>
+<p class="actions left"><a class="button" href="https://theoceanofus.pages.dev/">See the ocean</a><a class="button ghost" href="https://theoceanofus.pages.dev/everyone/">See everyone</a></p>
+<p>Looking for your creature?</p>
+<div class="find" role="search"><label class="sr-only" for="name">Your Instagram or Facebook name</label><input id="name" type="text" placeholder="Your Instagram or Facebook name" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="search"><button id="find-btn" type="button">Find</button></div>
+<div id="find-msg" class="find-msg" role="status"></div>
+<script>document.getElementById('find-btn').onclick=function(){window.earlyFind=1};document.getElementById('name').onkeydown=function(e){if(e.key==='Enter')window.earlyFind=1};</script>
+<footer class="foot"><p>The Ocean of Us is made by one person in Victoria, Australia.</p><p class="foot-links"><a href="https://theoceanofus.pages.dev/privacy/">About and privacy</a><a href="https://theoceanofus.pages.dev/grown-ups/">For grown-ups</a><a href="https://theoceanofus.pages.dev/shop/terms/">Shop terms</a><a href="mailto:theoceanofus@gmail.com">Contact us</a></p></footer>
+</main>
+<script type="module" data-site="https://theoceanofus.pages.dev/">
+// Served at any depth, so the script is fetched from the site's full address. A found name goes to its card, carrying #k= so the full name shows.
+const site = document.querySelector('script[data-site]').dataset.site;
+const { findHere } = await import(`${site}js/find-here.js`);
+findHere({ input: document.getElementById('name'), button: document.getElementById('find-btn'), msg: document.getElementById('find-msg') });
+</script>
+</body></html>

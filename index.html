@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-built="2026-11-14T21:09:36.803Z" data-areas="shore:1,reef:1,kelp:1,open:2,deep:1,abyss:1"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Ocean of Us</title><meta name="ocean-steps" content="on"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="preload" href="fonts/Figtree-var.woff2" as="font" type="font/woff2" crossorigin><meta property="og:type" content="website"><meta property="og:site_name" content="The Ocean of Us"><meta property="og:url" content="https://theoceanofus.pages.dev/"><meta property="og:title" content="The Ocean of Us"><meta property="og:description" content="Comment an ocean animal on any of our Reels. It becomes you, in a live ocean built from the comments."><meta property="og:image" content="https://theoceanofus.pages.dev/shared-preview.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/jpeg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://theoceanofus.pages.dev/shared-preview.jpg">
+<style>
+/* First paint: the water, the Find box and the tabs, inline so they show at once. The rest is in site.css, which doesn't hold up the page. */
+@font-face{font-family:Figtree;src:url(fonts/Figtree-var.woff2) format("woff2");font-weight:300 900;font-display:optional}
+*{box-sizing:border-box}
+html,body{margin:0;height:100vh;height:100dvh;overflow:hidden;background:#052a3e;color:#e7f2ef;font:16px/1.4 Figtree,"Helvetica Neue",Arial,sans-serif}
+#still{position:fixed;inset:0;background:linear-gradient(180deg,#0f566e 0%,#0b3a50 45%,#052a3e 100%)}
+#ocean{position:fixed;inset:0;display:block;width:100%;height:100vh;height:100dvh;opacity:0;transition:opacity .6s;touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+#ocean.on{opacity:1}
+#overlay{position:fixed;inset:0;display:block;width:100%;height:100vh;height:100dvh;pointer-events:none;-webkit-user-select:none;user-select:none}
+#overlay[hidden]{display:none}
+#ocean[hidden]{display:none}
+.find-wrap{position:fixed;top:0;left:0;right:0;z-index:3;padding:calc(10px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left));background:rgba(5,42,62,.86)}
+.find{display:flex;gap:8px}
+.find input{flex:1 1 0;min-width:0;min-height:44px;padding:10px 12px;border:1px solid #1d5068;border-radius:12px;background:#0b3d54;color:#e7f2ef;font:inherit}
+.find input::placeholder{color:#9fd3de}
+.find button{flex:0 0 auto;min-height:44px;padding:0 18px;border:0;border-radius:12px;background:#58e0cf;color:#062030;font:inherit;font-weight:700}
+.bar{position:fixed;bottom:0;left:0;right:0;z-index:2;background:#0a2c3f}
+.bar-links{display:flex;justify-content:center;gap:12px;padding:0 12px}
+.bar-links a{display:block;padding:12px 8px;font-size:13px;line-height:20px;color:#9fd3de}
+.tabs{display:flex;gap:4px;padding:0 12px calc(8px + env(safe-area-inset-bottom));background:#0a2c3f}
+.tabs a{flex:1 1 auto;white-space:nowrap;text-align:center;padding:12px 2px;min-height:44px;border-radius:10px;color:#9fd3de;text-decoration:none;font-weight:600}
+.tabs a[aria-current=page]{background:#0b3d54;color:#e7f2ef}
+</style>
+<link rel="stylesheet" href="site.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="site.css"></noscript>
+<link rel="modulepreload" href="js/ocean-page.js"><link rel="modulepreload" href="js/name-label.js"><link rel="modulepreload" href="js/search-box.js"><link rel="modulepreload" href="js/card-sheet.js"><link rel="modulepreload" href="js/card.js"><link rel="modulepreload" href="js/area-loader.js"><link rel="modulepreload" href="js/overlay.js"><link rel="modulepreload" href="js/reactions.js"><link rel="modulepreload" href="js/memory.js"><link rel="modulepreload" href="js/spotted.js"><link rel="modulepreload" href="js/seek.js"><link rel="modulepreload" href="js/names.js"><link rel="modulepreload" href="core/site-find.js"><link rel="modulepreload" href="core/site-names.js">
+</head><body class="ocean-page">
+<div id="still"></div>
+<canvas id="ocean" role="img" aria-label="A live ocean built from the comments: every creature is a real person">A live ocean built from the comments. Comment an ocean animal on any of our Reels and it becomes you. Use the Find box to look up your own.</canvas>
+<canvas id="overlay" aria-hidden="true"></canvas>
+<div class="bar"><div class="bar-links"><a class="hide-link" href="how/#hide">Hide my name</a><a class="remove-link" href="how/#remove">Remove my creature</a></div><nav class="tabs" aria-label="Sections"><a href="./" aria-current="page">Ocean</a><a href="everyone/">Everyone</a><a href="how/">How it works</a><a href="shop/">Shop</a></nav></div>
+<main class="ocean-main">
+<div class="find-wrap">
+<div class="find" role="search"><label class="sr-only" for="name">Your Instagram or Facebook name</label><input id="name" type="text" placeholder="Your Instagram or Facebook name" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="search"><button id="find-btn" type="button">Find</button></div>
+<button id="swim-to" class="swim-to" type="button" hidden></button>
+<div id="find-msg" class="find-msg" role="status"></div>
+<div id="area-msg" class="find-msg"></div>
+<div id="names-msg" class="find-msg"></div>
+<nav id="spot" class="spot" aria-label="In the spotlight" hidden></nav>
+</div>
+<p id="place" class="place" hidden></p>
+<p id="tip" class="tip" hidden><strong class="tip-promise">Comment an ocean animal on any of our Reels. It becomes you.</strong> Drag to look around. Tap a creature to see whose it is. Press and hold the water to feed it.</p>
+<div id="controls" class="ocean-controls" hidden>
+<div id="zones" class="ocean-zones" role="group" aria-label="Zones"></div>
+<button id="pause" class="pause" type="button" aria-label="Pause the ocean">Pause</button>
+<button id="sound" class="pause sound" type="button" aria-pressed="false" aria-label="Turn sound on" title="Sound off"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path class="snd-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="snd-off" d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+</div>
+<button id="who-open" class="who-open" type="button" hidden>Who lives here</button>
+<div id="zoom" class="zoom" role="group" aria-label="Zoom" hidden><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">&minus;</button><button id="just-ocean" type="button" aria-label="Just the ocean" title="Just the ocean" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+<button id="show-all" class="show-all" type="button" hidden>Show menus</button>
+<div id="play" class="play" hidden><p id="spotted-count" class="spotted-count"></p><button id="surprise" class="surprise" type="button">Surprise me</button><button id="seek" class="surprise" type="button" hidden>Hide and seek</button></div>
+<div id="seek-hud" class="seek-hud" hidden><span class="pic"><img id="seek-img" alt="" width="256" height="170"></span><div class="seek-words"><p id="seek-name" class="seek-name"></p><p id="seek-line" class="seek-line"></p></div><button id="seek-end" class="surprise" type="button">Give up</button></div>
+<p id="celebrate" class="celebrate" role="status" hidden></p>
+<section id="who" class="who" hidden aria-label="Who lives here"></section>
+<section id="sheet" class="sheet" hidden aria-label="Creature card"></section>
+</main>
+<script>/* Find pressed before the page's script has arrived on a slow connection: ocean-page.js picks this up. */document.getElementById('find-btn').onclick=function(){window.earlyFind=1};document.getElementById('name').onkeydown=function(e){if(e.key==='Enter')window.earlyFind=1};</script>
+<script type="module" src="js/ocean-page.js"></script>
+</body></html>
